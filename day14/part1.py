@@ -1,4 +1,4 @@
-# Grid is 101 x 103
+# Answer: 216772608
 
 import re
 
