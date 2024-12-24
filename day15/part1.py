@@ -1,6 +1,6 @@
 top, bottom = open("input.txt").read().split("\n\n")
 
-grid = [list(line) for line in top]
+grid = [list(line) for line in top.splitlines()]
 moves = bottom.replace("\n", "")
 
 rows = len(grid)
@@ -15,7 +15,6 @@ for r in range(rows):
     break
 
 for move in moves:
-    # dr = -1 if move == "^" else 1 if move == "v" else 0
     dr = {"^": -1, "v": 1}.get(move, 0)
     dc = {"<": -1, ">": 1}.get(move, 0)
     targets = [(r, c)]
@@ -29,21 +28,22 @@ for move in moves:
         if char == "#":
             go = False
             break
-        if char == "0":
+        if char == "O":
             targets.append((cr,cc))
         if char == ".":
             break
-
     if not go:
         continue
+
     grid[r][c] = "."
     grid[r + dr][c + dc] = "@"
     for br, bc in targets[1:]:
-        grid[br + dr][bc + dc] = "0"
+        grid[br + dr][bc + dc] = "O"
     r += dr
     c += dc
 
 # print(grid)
 # print(moves)
-for row in grid:
-    print(*row, sep="")
+# for row in grid:
+#     print(*row, sep="")
+print(sum(100 * r + c for r in range(rows) for c in range(cols) if grid[r][c] == "O"))
