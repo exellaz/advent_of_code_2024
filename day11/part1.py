@@ -11,7 +11,7 @@ if __name__ == "__main__":
     with open("input.txt") as file:
         stones = [int(x) for x in file.read().split()]
 
-    for _ in range(75):
+    for _ in range(25):
         output = []
         for stone in stones:
             if stone == 0:
